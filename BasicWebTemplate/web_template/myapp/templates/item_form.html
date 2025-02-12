@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}{{ object|yesno:"Edit Item,New Item" }}{% endblock %}
+
+{% block content %}
+    <h2>{{ object|yesno:"Edit Item,New Item" }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+    <a href="{% url 'item_list' %}" class="btn btn-secondary">Cancel</a>
+{% endblock %}
